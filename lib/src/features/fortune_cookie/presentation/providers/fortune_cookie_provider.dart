@@ -3,14 +3,26 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'fortune_cookie_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class FortuneCookieController extends _$FortuneCookieController {
   @override
-  List<FortuneCookie> build() {
-    return [];
+  FutureOr<List<FortuneCookie>> build() async {
+    return Future.value([]);
   }
 
-  void add(FortuneCookie cookie) {
-    state = [...state, cookie];
+  Future<void> add(FortuneCookie cookie) async {
+    state = const AsyncValue.loading();
+    await Future.delayed(const Duration(seconds: 2));
+    state = await AsyncValue.guard(() async {
+      return [...?state.value, cookie];
+    });
+  }
+
+  Future<void> remove(FortuneCookie cookie) async {
+    state = const AsyncValue.loading();
+    await Future.delayed(const Duration(seconds: 1));
+    state = await AsyncValue.guard(() async {
+      return state.value!..remove(cookie);
+    });
   }
 }

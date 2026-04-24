@@ -7,12 +7,12 @@ part of 'fortune_cookie_provider.dart';
 // **************************************************************************
 
 String _$fortuneCookieControllerHash() =>
-    r'af360d825b2c8765ed3dcbc240940e1aadcf2e31';
+    r'1f6c4a0378e584d4f8997fc4ad4a4aeeb2113802';
 
 /// See also [FortuneCookieController].
 @ProviderFor(FortuneCookieController)
 final fortuneCookieControllerProvider =
-    AutoDisposeNotifierProvider<
+    AsyncNotifierProvider<
       FortuneCookieController,
       List<FortuneCookie>
     >.internal(
@@ -25,6 +25,6 @@ final fortuneCookieControllerProvider =
       allTransitiveDependencies: null,
     );
 
-typedef _$FortuneCookieController = AutoDisposeNotifier<List<FortuneCookie>>;
+typedef _$FortuneCookieController = AsyncNotifier<List<FortuneCookie>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

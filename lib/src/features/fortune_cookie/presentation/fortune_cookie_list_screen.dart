@@ -13,13 +13,19 @@ class FortuneCookieListScreen extends ConsumerWidget {
     final controller = ref.read(fortuneCookieControllerProvider.notifier);
     return Scaffold(
       appBar: AppBar(title: const Text('Fortune Cookies')),
-      body: ListView.builder(
-        itemCount: cookies.length,
-        itemBuilder: (context, index) {
-          final cookie = cookies[index];
-          return FortuneCookieWidget(fortuneCookie: cookie);
-        },
-      ),
+      body: cookies.when(data: (data) {
+        return ListView.builder(
+          itemCount: data.length,
+          itemBuilder: (context, index) {
+            final cookie = data[index];
+            return FortuneCookieWidget(
+              fortuneCookie: cookie,
+            );
+          },
+        );
+      }, error: (error, stackTrace) {
+        return Center(child: Text(error.toString()));
+      }, loading: () => const Center(child: CircularProgressIndicator())),
       floatingActionButton: FloatingActionButton(
         onPressed: () => controller.add(FortuneCookie.random()),
         child: const Icon(Icons.add),
