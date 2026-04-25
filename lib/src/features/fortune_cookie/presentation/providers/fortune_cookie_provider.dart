@@ -26,3 +26,37 @@ class FortuneCookieController extends _$FortuneCookieController {
     });
   }
 }
+
+@riverpod
+Future<String> futureString() async {
+  await Future.delayed(Duration(seconds: 3));
+  return "Hello from Future";
+}
+
+@riverpod
+class FortuneCookieStream extends _$FortuneCookieStream {
+  @override
+  Stream<List<String>> build() async* {
+    final cookies = <String>[];
+    
+    cookies.add("Your fortune is as empty as an eggshell");
+    yield [...cookies];
+    await Future.delayed(const Duration(seconds: 2));
+    
+    cookies.add("A journey of a thousand miles begins with a single step");
+    yield [...cookies];
+    await Future.delayed(const Duration(seconds: 2));
+    
+    cookies.add("A watched pot never boils");
+    yield [...cookies];
+    await Future.delayed(const Duration(seconds: 2));
+    
+    cookies.add("The early bird catches the worm");
+    yield [...cookies];
+    await Future.delayed(const Duration(seconds: 2));
+    
+    cookies.add("To be or not to be, that is the question");
+    yield [...cookies];
+  }
+}
+
